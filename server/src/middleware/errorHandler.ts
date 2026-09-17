@@ -1,0 +1,2 @@
+import type { ErrorRequestHandler } from 'express';import { ZodError } from 'zod';import { GameError } from '../services/gameService';
+export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {  if (err instanceof ZodError) return res.status(400).json({ error: 'Invalid input', details: err.flatten().fieldErrors });  if (err instanceof GameError) return res.status(err.code === 'NOT_FOUND' ? 404 : 400).json({ error: err.message, code: err.code });  console.error(err);  res.status(500).json({ error: 'Internal server error' });};

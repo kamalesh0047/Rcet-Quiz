@@ -1,0 +1,1 @@
+import { redis } from '../redis/client';export async function socketRateLimit(key: string, max: number, windowSec: number) {  const n = await redis.incr(`rl:${key}`);  if (n === 1) await redis.expire(`rl:${key}`, windowSec);  return n <= max;}

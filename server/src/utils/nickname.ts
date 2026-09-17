@@ -1,0 +1,1 @@
+const BLOCKLIST = ['admin', 'host', 'teacher', 'system'];export function sanitizeNickname(raw: string): string | null {  const nick = raw.normalize('NFKC').replace(/[\u0000-\u001F\u007F<>{}[\]\\]/g, '').replace(/\s+/g, ' ').trim().slice(0, 20);  if (nick.length < 1) return null;  if (BLOCKLIST.includes(nick.toLowerCase())) return null;  return nick;}

@@ -1,0 +1,16 @@
+{
+  "name": "quizlive-platform",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev:client": "npm --workspace client run dev",
+    "dev:server": "npm --workspace server run dev",
+    "build:client": "npm --workspace client run build",
+    "build:server": "npm --workspace server run build",
+    "build": "npm run build:server && npm run build:client",
+    "migrate": "npm --workspace server run migrate"
+  }
+}

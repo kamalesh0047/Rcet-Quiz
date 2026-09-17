@@ -1,0 +1,1 @@
+import { redis } from '../redis/client';import { k } from '../redis/keys';export async function generateUniquePin(): Promise<string> {  for (let i = 0; i < 20; i++) {    const pin = String(Math.floor(100000 + Math.random() * 900000));    if (!(await redis.exists(k.game(pin)))) return pin;  }  throw new Error('Could not allocate PIN');}
