@@ -8,6 +8,7 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+app.get('/health', (_req, res) => res.json({ ok: true, ts: Date.now() }));
 const server = http.createServer(app);export const io = createSocketServer(server);
 server.listen(env.PORT, () => console.log(`🚀 API + Socket.IO on :${env.PORT}`));
 const shutdown = () => { console.log('shutting down'); io.close(); server.close(() => process.exit(0)); };process.on('SIGTERM', shutdown); process.on('SIGINT', shutdown);
